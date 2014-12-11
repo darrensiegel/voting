@@ -1,14 +1,147 @@
 <head>
-  <title>hello</title>
+
+    <!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <title>ScrumVote</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <div class="container">
 
-  {{> hello}}
+    <!-- all columns must be wrapped in a .row -->
+    <div class="row">
+        <div class="eleven columns"><h3>Voting</h3></div>
+    </div>
+
+    {{#if user}}
+      {{> room}}
+    {{else}}
+      {{> createRoom}}
+        <hr/>
+      {{> enterRoom}}
+    {{/if}}
+
+  </div>
 </body>
 
-<template name="login">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="room">
+    <h4>{{roomName}}</h4>
+    <table class="u-full-width">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Vote</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each voters}}
+          {{> voter}}
+        {{/each}}
+
+        </tbody>
+
+    </table>
+
+    {{#if revealed}}
+        Mean: <b>{{mean}}</b>  Mode: <b>{{mode}}</b>
+    {{/if}}
+
+
+
+    <form>
+
+        {{#if isAdmin}}
+          {{#if revealed}}
+            <input class="button-primary" type="submit" value="Reset" id="reset">
+          {{else}}
+            <input class="button-primary" type="submit" value="Reveal" id="reveal">
+          {{/if}}
+        {{else}}
+          <div class="eleven columns">
+              <label for="voteId">Vote!</label>
+              <select class="u-full-width" id="voteId">
+                  <option value="-">-</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="5">5</option>
+                  <option value="8">8</option>
+                  <option value="13">13</option>
+              </select>
+          </div>
+        {{/if}}
+    </form>
+</template>
+
+<template name="voter">
+    <tr>
+        <td>{{voter}}</td>
+        <td>{{currentVote}}</td>
+    </tr>
+</template>
+
+<template name="createRoom">
+    <form>
+
+        <div class="row">
+            <div class="eleven columns">
+                <h4>Create a room</h4>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="eleven columns">
+                <label for="roomId">Room name</label>
+                <input class="u-full-width" placeholder="room name" id="createId">
+            </div>
+        </div>
+
+        <input class="button-primary" type="submit" value="Create Room" id="createRoomId">
+    </form>
+</template>
+
+<template name="enterRoom">
+
+    <form>
+
+        <div class="row">
+            <div class="eleven columns">
+                <h4>Join a room</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="eleven columns">
+                <label for="userId">Voter name</label>
+                <input class="u-full-width" placeholder="user name" id="userId">
+            </div>
+        </div>
+        <div class="row">
+            <div class="eleven columns">
+                <label for="roomId">Room name</label>
+                <input class="u-full-width" placeholder="room name" id="roomId">
+            </div>
+        </div>
+
+        <input class="button-primary" type="submit" value="Enter Room" id="enterRoomId">
+    </form>
 </template>
