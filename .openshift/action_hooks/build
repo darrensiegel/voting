@@ -32,13 +32,12 @@ _SHOW_SETUP_PATH_MESSAGES="true" setup_path_for_custom_node_version
 if [ -f "${OPENSHIFT_REPO_DIR}"/package.json ]; then
    echo "  - Installing dependencies w/ new version of npm ... "
    echo
-   (cd "${OPENSHIFT_REPO_DIR}"; export TMPDIR="tmp"; npm install -d)
-   (cd "${OPENSHIFT_REPO_DIR}/programs/server";export TMPDIR="tmp"; npm install fibers -d --cache ${OPENSHIFT_DATA_DIR})
-    (cd "${OPENSHIFT_REPO_DIR}/programs/server";export TMPDIR="tmp"; npm install underscore -d --cache ${OPENSHIFT_DATA_DIR})
-    (cd "${OPENSHIFT_REPO_DIR}/programs/server";export TMPDIR="tmp"; npm install source-map-support -d --cache ${OPENSHIFT_DATA_DIR})
-        (cd "${OPENSHIFT_REPO_DIR}/programs/server";export TMPDIR="tmp"; npm install semver -d --cache ${OPENSHIFT_DATA_DIR})
-        (cd "${OPENSHIFT_REPO_DIR}/programs/server";export TMPDIR="tmp"; npm install websocket-driver -d --cache ${OPENSHIFT_DATA_DIR})
-        (cd "${OPENSHIFT_REPO_DIR}/programs/server";export TMPDIR="tmp"; npm install bson -d --cache ${OPENSHIFT_DATA_DIR})
+   (cd "${OPENSHIFT_REPO_DIR}"; export TMPDIR="${OPENSHIFT_REPO_DIR}/tmp"; npm install -d)
+   (cd "${OPENSHIFT_REPO_DIR}/programs/server";export TMPDIR="${OPENSHIFT_REPO_DIR}/tmp"; npm install fibers -d --cache ${OPENSHIFT_DATA_DIR})
+    (cd "${OPENSHIFT_REPO_DIR}/programs/server";export TMPDIR="${OPENSHIFT_REPO_DIR}/tmp"; npm install underscore -d --cache ${OPENSHIFT_DATA_DIR})
+    (cd "${OPENSHIFT_REPO_DIR}/programs/server";export TMPDIR="${OPENSHIFT_REPO_DIR}/tmp"; npm install source-map-support -d --cache ${OPENSHIFT_DATA_DIR})
+        (cd "${OPENSHIFT_REPO_DIR}/programs/server";export TMPDIR="${OPENSHIFT_REPO_DIR}/tmp"; npm install semver -d --cache ${OPENSHIFT_DATA_DIR})
+        (cd "${OPENSHIFT_REPO_DIR}/programs/server";export TMPDIR="${OPENSHIFT_REPO_DIR}/tmp"; npm install websocket-driver -d --cache ${OPENSHIFT_DATA_DIR})
+        (cd "${OPENSHIFT_REPO_DIR}/programs/server";export TMPDIR="${OPENSHIFT_REPO_DIR}/tmp"; npm install bson -d --cache ${OPENSHIFT_DATA_DIR})
 
 fi
-
